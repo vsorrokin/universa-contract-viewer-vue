@@ -13,6 +13,9 @@
     "def_data": "Definition data",
     "state_data": "State data",
     "root_contract": "This is a root contract",
-    "root_branch": "root branch"
+    "root_branch": "root branch",
+    "owner": "Owner",
+    "signatures_no_ref": "Signatures (references check is unavailable)",
+    "Roles": "Roles"
   }
 }

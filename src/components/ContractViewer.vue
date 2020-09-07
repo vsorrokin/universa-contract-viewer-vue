@@ -1,6 +1,15 @@
 <template lang="pug">
   .universa-contract-viewer(:style="cssVars" v-if="contract")
 
+    .contract-title
+      svg.logo(version='1.1', xmlns='http://www.w3.org/2000/svg', width='31', height='34', viewBox='0 0 939 1024')
+        title
+        g
+        path(:fill="`rgb(${styleConfig.textColor})`", d='M927.949 248.273l-448.201-245.466c-2.95-1.655-6.475-2.63-10.228-2.63s-7.278 0.975-10.335 2.685l0.107-0.055-448.242 245.466c-6.638 3.69-11.056 10.662-11.056 18.665 0 0.003 0 0.007 0 0.010v-0.001 490.105c0 0.003 0 0.006 0 0.010 0 8.004 4.418 14.975 10.948 18.609l0.108 0.055 448.076 245.466c2.95 1.655 6.475 2.63 10.228 2.63s7.278-0.975 10.335-2.685l-0.107 0.055 448.365-245.466c6.638-3.69 11.056-10.662 11.056-18.665 0-0.003 0-0.007 0-0.010v0.001-490.105c0-0.003 0-0.006 0-0.010 0-8.004-4.418-14.975-10.948-18.609l-0.108-0.055zM915.526 742.934l-133.582-72.878v-319.132c0-0.007 0-0.014 0-0.022 0-8.919-7.23-16.149-16.149-16.149-2.923 0-5.664 0.777-8.029 2.134l0.079-0.042-134.576 76.108c-9.108 5.223-15.146 14.887-15.155 25.961v135.737l-126.998-69.607v-474.701l434.411 237.889zM23.474 742.934v-461.823l129.442 71.014v320.001zM469.355 525.459l126.46 69.276-123.313 70.394c-0.953 0.547-2.095 0.869-3.313 0.869s-2.359-0.322-3.346-0.887l0.033 0.017-126.336-68.696zM457.596 505.127l-130.891 71.636v-142.898c0-0.017 0-0.037 0-0.057 0-8.705-4.797-16.29-11.891-20.255l-0.117-0.060-278.51-152.216 421.409-230.808zM176.394 364.796l21.904 12.174 104.804 57.309v155.612l-126.708 69.234zM315.194 609.848l139.463 76.025c4.184 2.348 9.183 3.731 14.505 3.731 5.529 0 10.71-1.493 15.161-4.098l-0.142 0.077 139.793-79.918c4.607-2.676 7.657-7.587 7.661-13.209v-153.376c0.006-2.352 1.293-4.403 3.199-5.491l0.031-0.016 123.644-69.897v306.419l-286.875 160.414c-0.68 0.386-1.494 0.614-2.36 0.614s-1.68-0.228-2.384-0.627l0.024 0.013-277.93-151.553zM469.355 1000.035l-433.169-237.309 128.365-70.394 290.932 158.841c3.95 2.236 8.673 3.555 13.706 3.555s9.757-1.319 13.847-3.628l-0.141 0.073 287.289-160.746 132.506 72.298z')
+      .info
+        .title {{info.name}}
+        .desc {{info.description}}
+
     // General information
     .data-block
       .title {{$t('viewer.general')}}
@@ -13,6 +22,38 @@
             .td-value(@click="activateLong(it, $event)"
                       v-if="it.value"
                       :class="{long: it.long, active: it.long && it.value === activeLongValue}")
+              |{{it.value}}
+
+    // Owner
+    .data-block(v-if="info.ownerAdresses && info.ownerAdresses.length")
+      .title {{$t('viewer.owner')}}
+
+      table: tbody
+        tr(v-for="(it, idx) in info.ownerAdresses" @click="copyValue($event, it)")
+          td Key \#{{idx + 1}}
+          td
+            .copied-notification {{$t('viewer.value_copied')}}
+            .td-value.long(@click="activateLong(it, $event)"
+                           :class="{active: it.value === activeLongValue}")
+              |{{it.value}}
+
+    // Signatures
+    .data-block(v-if="info.signatures && (info.signatures.keys.length || info.signatures.rolesList.length)")
+      .title {{$t('viewer.signatures_no_ref')}}
+
+      table: tbody
+        tr(@click="copyValue($event, info.signatures.rolesList)")
+          td {{$t('viewer.Roles')}}
+          td
+            .copied-notification {{$t('viewer.value_copied')}}
+            .td-value
+              |{{info.signatures.rolesList.value.join(', ')}}
+        tr(v-for="it in info.signatures.keys" @click="copyValue($event, it)")
+          td {{it.label}}
+          td
+            .copied-notification {{$t('viewer.value_copied')}}
+            .td-value.long(@click="activateLong(it, $event)"
+                           :class="{active: it.value === activeLongValue}")
               |{{it.value}}
 
     // State data
@@ -46,6 +87,24 @@
     transition-timing-function: ease
     transition-duration: .3s
     transition-property: unquote(props)
+
+  .contract-title
+    position: relative
+    padding-left: 50px
+    margin-bottom: 50px
+
+    .logo
+      position: absolute
+      height: 34px
+      top: 0
+      bottom: 0
+      margin: auto
+      left: 0
+
+    .title
+      font-size: 24px
+    .desc
+      font-size: 16px
 
   .data-block
     margin-bottom: 50px
@@ -87,7 +146,7 @@
   .copied-notification
     position: absolute
     font-weight: 500
-    color: "rgba(%s, 1)" % var(--text-color)
+    color: #fff
     //background-color: "rgba(%s, 1)" % var(--bg-color)
     background-color: #147b14
     border-radius: 4px
@@ -166,6 +225,14 @@
     }
   };
 
+  function copy(val) {
+    try {
+      navigator.clipboard.writeText(val);
+    } catch (e) {}
+  }
+
+  let privateKey = 'JgAcAQABvID2aGSNX6bzGyUAQjReoePsIwjrcKXvKR6mODV588tuxy2bJKiUDoFuMwN2RDB+1RVEIxDN2oaU2phiu6cnNMEv99eQ02P2oxODzKKmO/80rLhITazKSa5vsyKcSeoa+iGKEtc/hCcK2qTcv10cq0qEXaNSMvw0K+A/LvCe5PgKnbyA8Sk8tTUR5prey5zC6pl4utzITXuGmOAHIfeglUi/ilphXXXIYlcOKUBuKzUH7k7nFn0R3JcxDAlwYJVuXsYSmjZyCaknLrCU1RV5fCJ0dunKdX6+glNMp2eiCXdXCaE+HbKQZQFCz3zNSvBI45RIRFhKYR76OiD2xnJhQCATwJM=';
+
   export default {
     name: 'universa-contract-viewer',
 
@@ -177,8 +244,8 @@
         type: Object,
         default() {
           return {
-            textColor: '255, 255, 255',
-            bgColor: '0, 0, 0'
+            textColor: '0, 0, 0',
+            bgColor: '255, 255, 255'
           }
         }
       }
@@ -235,7 +302,11 @@
           },
 
           definition: null,
-          state: null
+          state: null,
+          ownerAdresses: null,
+          signatures: null,
+          name: null,
+          description: null
         }
       }
     },
@@ -247,6 +318,8 @@
     },
 
     mounted() {
+      this.loadContract();
+
       document.addEventListener('click', e => {
         if (e.target.classList.contains('long')) return;
         this.activeLongValue = null;
@@ -263,9 +336,89 @@
 
         console.log(this.contract);
 
+        this.info.name = this.contract.definition.data.name;
+        this.info.description = this.contract.definition.data.description;
+
+        this.fillNetworkInfo();
         this.fillGeneralInfo();
+        this.fillOwnerInfo();
         this.fillStaticData('state');
         this.fillStaticData('definition');
+        this.fillSignatures();
+      },
+
+      async fillNetworkInfo() {
+        const boss = Uni.decode64(privateKey);
+        privateKey = await Uni.PrivateKey.unpackBOSS(boss);
+
+        const network = new Uni.Network(privateKey, {topologyKey: 'universa_topology'});
+
+        try {
+          await network.connect();
+        } catch (err) {
+          console.log("network connection error: ", err);
+          return;
+        }
+
+        let isApproved;
+
+        try {
+          const approvedId = (await this.contract.hashId()).base64
+          isApproved = await network.isApproved(approvedId, 0.6);
+        }
+        catch (err) {
+          console.log("on network command:", err);
+          return;
+        }
+
+        console.log(isApproved);
+      },
+
+      async fillSignatures() {
+        const keys = await this.contract.getSignatureKeys();
+
+        const keyAddresses = [];
+        keys.forEach((key, idx) => {
+          keyAddresses.push({
+            label: `Key #${idx + 1} (short)`,
+            value: key.shortAddress58,
+            long: true
+          });
+
+          keyAddresses.push({
+            label: `Key #${idx + 1} (long)`,
+            value: key.longAddress58,
+            long: true
+          });
+        });
+
+        const roles = {
+          ...this.contract.state.roles,
+          owner: this.contract.owner,
+          issuer: this.contract.issuer,
+          creator: this.contract.creator
+        };
+
+        const rolesList = [];
+
+        for (let key in roles) {
+
+          if (roles[key].availableFor({roles, keys})) {
+            rolesList.push(roles[key].name);
+          }
+
+        }
+
+        this.info.signatures = {
+          keys: keyAddresses,
+          rolesList: {value: rolesList}
+        };
+      },
+
+      fillOwnerInfo() {
+        this.info.ownerAdresses = this.contract.owner.addresses.map(it => {
+          return {value: it.base58, long: true};
+        });
       },
 
       async fillGeneralInfo() {
@@ -317,7 +470,7 @@
       copyValue(e, it) {
         selectText(e.currentTarget.querySelector('.td-value'));
 
-        navigator.clipboard.writeText(it.value);
+        copy(it.value);
 
         const copied = e.currentTarget.querySelector('.copied-notification');
 
@@ -340,7 +493,7 @@
 
         selectText(e.target);
 
-        navigator.clipboard.writeText(it.value);
+        copy(it.value);
       }
     }
   };
