@@ -1,16 +1,18 @@
 {
-  "value_copied": "Value copied to clipboard",
-  "general": "General information",
-  "Revision": "Revision",
-  "revision": "revision",
-  "branch": "branch",
-  "issued": "Issued",
-  "expires": "Expires",
-  "origin": "Origin",
-  "parent": "Parent",
-  "api_level": "API level",
-  "def_data": "Definition data",
-  "state_data": "State data",
-  "root_contract": "This is a root contract",
-  "root_branch": "root branch"
+  "viewer": {
+    "value_copied": "Value copied to clipboard",
+    "general": "General information",
+    "Revision": "Revision",
+    "revision": "revision",
+    "branch": "branch",
+    "issued": "Issued",
+    "expires": "Expires",
+    "origin": "Origin",
+    "parent": "Parent",
+    "api_level": "API level",
+    "def_data": "Definition data",
+    "state_data": "State data",
+    "root_contract": "This is a root contract",
+    "root_branch": "root branch"
+  }
 }

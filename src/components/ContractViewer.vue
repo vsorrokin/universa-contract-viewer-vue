@@ -3,7 +3,7 @@
 
     // General information
     .data-block
-      .title {{$t('general')}}
+      .title {{$t('viewer.general')}}
 
       table: tbody
         tr(v-for="(it, idx) in info.general" @click="copyValue($event, it)")
@@ -17,7 +17,7 @@
 
     // State data
     .data-block(v-if="info.state")
-      .title {{$t('state_data')}}
+      .title {{$t('viewer.state_data')}}
 
       table: tbody
         tr(v-for="it in info.state" @click="copyValue($event, it)")
@@ -29,7 +29,7 @@
 
     // Definition data
     .data-block(v-if="info.definition")
-      .title {{$t('def_data')}}
+      .title {{$t('viewer.def_data')}}
 
       table: tbody
         tr(v-for="it in info.definition" @click="copyValue($event, it)")
@@ -87,7 +87,7 @@
   .copied-notification
     position: absolute
     font-weight: 500
-    color: #fff
+    color: "rgba(%s, 1)" % var(--text-color)
     //background-color: "rgba(%s, 1)" % var(--bg-color)
     background-color: #147b14
     border-radius: 4px
@@ -166,6 +166,8 @@
     }
   };
 
+  import VContractViewer from '@/components/Universa/ContractViewer';
+
   export default {
     name: 'universa-contract-viewer',
 
@@ -177,8 +179,8 @@
         type: Object,
         default() {
           return {
-            textColor: '0, 0, 0',
-            bgColor: '255, 255, 255'
+            textColor: '255, 255, 255',
+            bgColor: '0, 0, 0'
           }
         }
       }
@@ -200,15 +202,15 @@
         info: {
           general: {
             rev: {
-              label: this.$t('Revision'),
+              label: this.$t('viewer.Revision'),
               value: null
             },
             issued: {
-              label: this.$t('issued'),
+              label: this.$t('viewer.issued'),
               value: null
             },
             expires: {
-              label: this.$t('expires'),
+              label: this.$t('viewer.expires'),
               value: null
             },
             id: {
@@ -217,19 +219,19 @@
               long: true
             },
             origin: {
-              label: this.$t('origin'),
+              label: this.$t('viewer.origin'),
               value: null,
               long: true,
               contractLink: true
             },
             parent: {
-              label: this.$t('parent'),
+              label: this.$t('viewer.parent'),
               value: null,
               long: true,
               contractLink: true
             },
             api_level: {
-              label: this.$t('api_level'),
+              label: this.$t('viewer.api_level'),
               value: null
             }
           },
@@ -269,8 +271,8 @@
       },
 
       async fillGeneralInfo() {
-        const branch = this.contract.state.branchId ? `${this.$t('branch')} ${this.contract.state.branchId}` : this.$t('root_branch');
-        this.info.general.rev.value = `${this.$t('revision')} ${this.contract.state.revision}, ${branch}`;
+        const branch = this.contract.state.branchId ? `${this.$t('viewer.branch')} ${this.contract.state.branchId}` : this.$t('viewer.root_branch');
+        this.info.general.rev.value = `${this.$t('viewer.revision')} ${this.contract.state.revision}, ${branch}`;
 
         this.info.general.issued.value = this.contract.definition.createdAt.toISOString();
 
@@ -283,7 +285,7 @@
           this.info.general.origin.long = true;
           this.info.general.origin.contractLink = true;
         } else {
-          this.info.general.origin.value = this.$t('root_contract');
+          this.info.general.origin.value = this.$t('viewer.root_contract');
           this.info.general.origin.long = false;
           this.info.general.origin.contractLink = false;
         }
@@ -293,7 +295,7 @@
           this.info.general.parent.long = true;
           this.info.general.parent.contractLink = true;
         } else {
-          this.info.general.parent.value = this.$t('root_contract');
+          this.info.general.parent.value = this.$t('viewer.root_contract');
           this.info.general.parent.long = false;
           this.info.general.parent.contractLink = false;
         }
@@ -317,10 +319,7 @@
       copyValue(e, it) {
         selectText(e.currentTarget.querySelector('.td-value'));
 
-        try {
-          navigator.clipboard.writeText(it.value);
-        } catch (e) {}
-
+        navigator.clipboard.writeText(it.value);
 
         const copied = e.currentTarget.querySelector('.copied-notification');
 
@@ -345,6 +344,10 @@
 
         navigator.clipboard.writeText(it.value);
       }
+    },
+
+    components: {
+      VContractViewer
     }
   };
 </script>
