@@ -9,7 +9,7 @@
         tr(v-for="(it, idx) in info.general" @click="copyValue($event, it)")
           td {{it.label}}
           td
-            .copied-notification {{$t('value_copied')}}
+            .copied-notification {{$t('viewer.value_copied')}}
             .td-value(@click="activateLong(it, $event)"
                       v-if="it.value"
                       :class="{long: it.long, active: it.long && it.value === activeLongValue}")
@@ -23,7 +23,7 @@
         tr(v-for="it in info.state" @click="copyValue($event, it)")
           td {{it.label}}
           td
-            .copied-notification {{$t('value_copied')}}
+            .copied-notification {{$t('viewer.value_copied')}}
             .td-value(v-if="it.value")
               |{{it.value}}
 
@@ -35,7 +35,7 @@
         tr(v-for="it in info.definition" @click="copyValue($event, it)")
           td {{it.label}}
           td
-            .copied-notification {{$t('value_copied')}}
+            .copied-notification {{$t('viewer.value_copied')}}
             .td-value(v-if="it.value")
               |{{it.value}}
 </template>
@@ -165,8 +165,6 @@
         window.getSelection().addRange(range);
     }
   };
-
-  import VContractViewer from '@/components/Universa/ContractViewer';
 
   export default {
     name: 'universa-contract-viewer',
@@ -344,10 +342,6 @@
 
         navigator.clipboard.writeText(it.value);
       }
-    },
-
-    components: {
-      VContractViewer
     }
   };
 </script>
