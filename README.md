@@ -3,7 +3,7 @@
 
 Vue.js component to display universa contract data.
 
-![Contract info example](/dev/screen.png?raw=true)
+![Contract info example](/dev/screen.png?raw=true){height=300px}
 
 ## Usage instructions ##
 
