@@ -22,6 +22,9 @@
     "Status": "Status",
     "Network": "Network",
     "approved_main": "Approved by Main Net",
-    "approved_test": "Approved by Test Net"
+    "approved_test": "Approved by Test Net",
+    "storage": "Storage",
+    "uni_cloud": "Unixchange private cloud",
+    "download": "Download"
   }
 }

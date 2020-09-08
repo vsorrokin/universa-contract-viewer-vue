@@ -4,7 +4,9 @@
 
     table: tbody
       tr(v-for="(it, idx) in data" @click="copyValue($event, it)")
-        td {{it.label}}
+        td
+          template(v-if="!it.contractLink") {{it.label}}
+          template(v-else): a(:href="`/${it.value}`") {{it.label}}
         td
           .copied-notification {{$t('viewer.value_copied')}}
           .td-value(@click="activateLong(it, $event)"

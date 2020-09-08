@@ -57,8 +57,11 @@
 
     methods: {
       async connect() {
-        const boss = Uni.decode64(privateKey);
-        privateKey = await Uni.PrivateKey.unpack(boss);
+        try {
+          const boss = Uni.decode64(privateKey);
+          privateKey = await Uni.PrivateKey.unpack(boss);
+        } catch (e) {}
+
 
         const network = new Uni.Network(privateKey, {topologyKey: 'universa_topology'});
 
@@ -101,7 +104,7 @@
       fillStatus(status) {
         let statusValue = this.getStateValue(status.states);
         let statusText = statusValue;
-        
+
         if (this.info.createdAt) {
           statusText = `${statusValue}, ${dayjs(this.info.createdAt).format('YYYY DD MMM HH:mm')}`;
         }

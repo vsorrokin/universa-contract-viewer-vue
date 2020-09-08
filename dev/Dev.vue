@@ -1,8 +1,7 @@
 <template lang="pug">
   #app
     input(type="file" @change="submit")
-    //v-contract-viewer(:data="contract" contract-id="VT5ytsOyNED2QY4Oi0xnLePQ3xa0ezFzlO0ke0FxOYrkWe3ioUkuJGwcmrx5TViBzuFBrzhUaT9C6LWGwhtx13keGKTUgrHnLMp9lv5vEjmYFr/cukKsfpaL5PGiTe7W")
-
+    //v-contract-viewer(:data="contract" contract-id="NPo4dIkNdgYfGiNrdExoX003+lFT/d45OA6GifmcRoTzxSRSm5c5jDHBSTaAS+QleuN7ttX1rTvSQbHIIqkcK/zWjx/fCpP9ziwsgXbyyCtUhLqP9G4YZ+zEY/yL/GVE")
     v-contract-viewer(:data="contract")
 </template>
 

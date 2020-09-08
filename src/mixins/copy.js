@@ -3,6 +3,8 @@ import {selectText, copy} from '@/util/helpers';
 export default {
   methods: {
     copyValue(e, it) {
+      if (it.copy === false) return;
+
       selectText(e.currentTarget.querySelector('.td-value'));
 
       copy(it.value);
