@@ -349,9 +349,11 @@
 
       async fillNetworkInfo() {
         const boss = Uni.decode64(privateKey);
-        privateKey = await Uni.PrivateKey.unpackBOSS(boss);
+        privateKey = await Uni.PrivateKey.unpack(boss);
 
         const network = new Uni.Network(privateKey, {topologyKey: 'universa_topology'});
+
+        console.log(network.size());
 
         try {
           await network.connect();
