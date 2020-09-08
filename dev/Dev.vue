@@ -1,6 +1,8 @@
 <template lang="pug">
   #app
     input(type="file" @change="submit")
+    //v-contract-viewer(:data="contract" contract-id="VT5ytsOyNED2QY4Oi0xnLePQ3xa0ezFzlO0ke0FxOYrkWe3ioUkuJGwcmrx5TViBzuFBrzhUaT9C6LWGwhtx13keGKTUgrHnLMp9lv5vEjmYFr/cukKsfpaL5PGiTe7W")
+
     v-contract-viewer(:data="contract")
 </template>
 

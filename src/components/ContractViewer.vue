@@ -1,22 +1,25 @@
 <template lang="pug">
-  .universa-contract-viewer(:style="cssVars" v-if="contract")
-    v-title(:contract="contract" :style-config="styleConfig")
+  .universa-contract-viewer(:style="cssVars")
+    template(v-if="contract || contractId")
+      v-title(:contract="contract" :contract-id="contractId" :style-config="styleConfig")
 
-    v-status(:contract="contract" :style-config="styleConfig")
+      v-status(:contract="contract" :contract-id="contractId" :style-config="styleConfig")
 
-    v-general(:contract="contract")
+    template(v-if="contract")
+      v-general(:contract="contract")
 
-    v-owner(:contract="contract")
+      v-owner(:contract="contract")
 
-    v-signatures(:contract="contract")
+      v-signatures(:contract="contract")
 
-    v-static-data(type="state" :contract="contract")
+      v-static-data(type="state" :contract="contract")
 
-    v-static-data(type="definition" :contract="contract")
+      v-static-data(type="definition" :contract="contract")
 </template>
 
 <style lang="stylus" scoped>
-
+  .universa-contract-viewer
+    min-width: 320px
 </style>
 
 <script>
@@ -32,7 +35,10 @@
 
     props: {
       data: {
-        required: true
+        required: false
+      },
+      contractId: {
+        required: false
       },
       styleConfig: {
         type: Object,
@@ -73,8 +79,14 @@
     methods: {
       loadContract() {
         if (!this.data) return;
-        const boss = Uni.decode64(this.data);
-        this.contract = Uni.Boss.load(boss).contract;
+
+        try {
+          const boss = Uni.decode64(this.data);
+          this.contract = Uni.Boss.load(boss).contract;
+        } catch (e) {
+          console.error(e);
+        }
+
         console.log(this.contract);
       }
     },

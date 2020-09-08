@@ -19,7 +19,10 @@
 
     props: {
       contract: {
-        required: true
+        required: false
+      },
+      contractId: {
+        required: false
       },
       styleConfig: {
         required: true
@@ -41,6 +44,10 @@
 
     methods: {
       fillTitleInfo() {
+        if (!this.contract) {
+          this.info.name = 'Universa smart contract';
+          return;
+        }
         this.info.name = this.contract.definition.data.name;
         this.info.description = this.contract.definition.data.description;
       }

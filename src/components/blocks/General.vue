@@ -31,7 +31,7 @@
               value: null
             },
             expires: {
-              label: this.$t('viewer.expires'),
+              label: this.$t('viewer.Expires'),
               value: null
             },
             id: {
@@ -92,6 +92,8 @@
         }
 
         this.info.general.api_level.value = this.contract.version;
+
+        this.info.general = Object.values(this.info.general);
       },
     },
 

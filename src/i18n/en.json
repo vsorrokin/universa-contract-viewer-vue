@@ -6,7 +6,7 @@
     "revision": "revision",
     "branch": "branch",
     "issued": "Issued",
-    "expires": "Expires",
+    "Expires": "Expires",
     "origin": "Origin",
     "parent": "Parent",
     "api_level": "API level",
@@ -17,6 +17,11 @@
     "owner": "Owner",
     "signatures_no_ref": "Signatures (references check is unavailable)",
     "Roles": "Roles",
-    "checked_by_nodes": "Checked by {count} nodes"
+    "checked_by_nodes": "Checked by {count} nodes",
+    "contract_status": "Contract status",
+    "Status": "Status",
+    "Network": "Network",
+    "approved_main": "Approved by Main Net",
+    "approved_test": "Approved by Test Net"
   }
 }

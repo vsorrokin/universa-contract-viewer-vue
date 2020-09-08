@@ -50,6 +50,7 @@
     "webpack-merge": "^5.1.3"
   },
   "dependencies": {
+    "dayjs": "^1.8.35",
     "universa-core": "^0.5.2"
   }
 }

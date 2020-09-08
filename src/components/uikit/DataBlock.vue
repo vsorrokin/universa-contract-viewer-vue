@@ -1,5 +1,5 @@
 <template lang="pug">
-  .data-block
+  .data-block(v-if="data && data.length")
     .title {{title}}
 
     table: tbody
@@ -10,7 +10,8 @@
           .td-value(@click="activateLong(it, $event)"
                     v-if="it.value"
                     :class="{long: it.long, active: it.long && it.value === activeLongValue}")
-            |{{it.value}}
+            template(v-if="!it.html") {{it.value}}
+            template(v-else): span(v-html="it.value")
 </template>
 
 <style lang="stylus" scoped>

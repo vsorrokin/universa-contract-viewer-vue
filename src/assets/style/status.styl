@@ -1,0 +1,38 @@
+@import 'mixins'
+
+.status-block
+  margin-bottom: 50px
+  .title
+    font-size: 19px
+    margin-bottom: 15px
+
+.nodes-counter
+  height: 19px
+  margin-bottom: 40px
+
+  pointer-events: none
+  user-select: none
+
+  // -- Flex Position --
+  display: flex
+  justify-content: space-between
+
+  // -- Classic Position --
+  // overflow: hidden
+  // white-space: nowrap
+  // clearfix()
+  // .tick
+  //   float: left
+  //   vertical-align: top
+  //   margin-left: 11px
+  //   &:first-child
+  //     margin-left: 0
+
+  .tick
+    width: 2px
+    height: 100%
+    background-color: #1ba93e
+    opacity: 0
+    trans('opacity')
+    &.active
+      opacity: 1
