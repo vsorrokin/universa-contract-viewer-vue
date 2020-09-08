@@ -10,12 +10,13 @@
     "origin": "Origin",
     "parent": "Parent",
     "api_level": "API level",
-    "def_data": "Definition data",
+    "definition_data": "Definition data",
     "state_data": "State data",
     "root_contract": "This is a root contract",
     "root_branch": "root branch",
     "owner": "Owner",
     "signatures_no_ref": "Signatures (references check is unavailable)",
-    "Roles": "Roles"
+    "Roles": "Roles",
+    "checked_by_nodes": "Checked by {count} nodes"
   }
 }

@@ -1,0 +1,29 @@
+@import 'mixins'
+
+table
+  width: 100%
+  border-collapse: collapse
+  table-layout: fixed
+  font-size: 15px
+  word-break: break-word
+
+td
+  padding: 12px 0px 12px 0px
+  border-bottom: "1px solid rgba(%s, 0.4)" % var(--text-color)
+  height: 55px
+  position: relative
+  trans('padding')
+
+  &:first-child
+    padding-left: 10px
+
+tr
+  cursor: pointer
+  trans('background-color')
+  &:hover
+    background-color: "rgba(%s, 0.1)" % var(--text-color)
+    td:first-child
+      padding-left: 20px
+  &:last-child
+    td
+      border-bottom: none

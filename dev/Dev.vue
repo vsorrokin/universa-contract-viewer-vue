@@ -31,7 +31,6 @@
 
         reader.onload = (file) => {
           this.contract = reader.result.split('base64,')[1];
-          console.log(this.contract);
         }
 
         reader.readAsDataURL(event.target.files[0]);
