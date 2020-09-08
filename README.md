@@ -3,7 +3,7 @@
 
 Vue.js component to display universa contract data.
 
-![Contract info example](/dev/screen.png?raw=true){height=300px}
+![Contract info example](/dev/screen.png?raw=true)
 
 ## Usage instructions ##
 
@@ -23,7 +23,9 @@ Usage:
                        :style-config="{textColor: '0, 0, 0', bgColor: '255, 255, 255'}" />
 
 **data** base64 contract string.
+
 **contract-id** you can pass contract ID only. In this case contract status will be checked only.
+
 **style-config** uses RGB color values.
 
 Also you must have [vue-i18n](https://www.npmjs.com/package/vue-i18n) installed and configured with these keys in your lang file:
