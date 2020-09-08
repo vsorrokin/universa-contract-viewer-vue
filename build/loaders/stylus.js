@@ -16,7 +16,7 @@ module.exports = {
       }
 
     } : 'vue-style-loader',
-    'css-loader',
+    {loader: 'css-loader', options: {esModule: false}},
     'stylus-loader'
   ]
 };

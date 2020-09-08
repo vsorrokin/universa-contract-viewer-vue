@@ -11,12 +11,13 @@ module.exports = merge(baseConfig, {
 
   output: {
     filename: 'index.js',
-    library: 'VueSelect',
+    library: 'VueContractViewer',
     libraryTarget: 'umd',
     globalObject: 'typeof self !== \'undefined\' ? self : this',
   },
 
   optimization: {
+    //minimize: false,
     minimizer: [new TerserJSPlugin({sourceMap: true}), new OptimizeCSSAssetsPlugin({})],
   },
 

@@ -1,6 +1,6 @@
 {
   "name": "vue-universa-contract-viewer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Display Universa Contract details in browser",
   "private": false,
   "main": "dist/index.js",
