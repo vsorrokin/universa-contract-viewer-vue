@@ -1,11 +1,19 @@
 <template lang="pug">
   .status-block
+
+
     .title: i18n(path="viewer.checked_by_nodes")
       template(v-slot:count) {{nodesChecked}}/{{topologySize}}
     .nodes-counter
-      .tick(v-for="n in topologySize" :class="{active: n <= nodesChecked}")
+      .tick.active
+      .tick(v-for="n in topologySize - 1" :class="{active: n <= nodesChecked}")
 
-    v-data-block(:title="$t('viewer.contract_status')" :data="status")
+    .preloader(v-if="!status.length")
+      div
+      div
+      div
+      div
+    v-data-block(v-else :title="$t('viewer.contract_status')" :data="status")
 </template>
 
 <style lang="stylus" scoped>
@@ -57,6 +65,8 @@
 
     methods: {
       async connect() {
+        if (window.UniNetworkConnected) return UniNetworkConnected;
+
         try {
           const boss = Uni.decode64(privateKey);
           privateKey = await Uni.PrivateKey.unpack(boss);
@@ -66,6 +76,8 @@
         const network = new Uni.Network(privateKey, {topologyKey: 'universa_topology'});
 
         await network.connect();
+
+        window.UniNetworkConnected = network;
 
         return network;
       },

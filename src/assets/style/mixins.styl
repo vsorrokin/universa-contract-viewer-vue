@@ -2,3 +2,13 @@ trans(props...)
   transition-timing-function: ease
   transition-duration: .3s
   transition-property: unquote(props)
+
+abs-center(dir = 'all')
+  position: absolute
+  if dir == 'hz' || dir == 'all'
+    left: 0
+    right: 0
+  if dir == 'vt' || dir == 'all'
+    top: 0
+    bottom: 0
+  margin: auto

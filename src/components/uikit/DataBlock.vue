@@ -6,7 +6,7 @@
       tr(v-for="(it, idx) in data" @click="copyValue($event, it)")
         td
           template(v-if="!it.contractLink") {{it.label}}
-          template(v-else): a(:href="`/${it.value}`") {{it.label}}
+          template(v-else): a(:href="`/${encodeURIComponent(it.value)}`") {{it.label}}
         td
           .copied-notification {{$t('viewer.value_copied')}}
           .td-value(@click="activateLong(it, $event)"
@@ -32,6 +32,12 @@
 
     mixins: [CopyMixin, LongMixin],
 
-    props: ['title', 'data']
+    props: ['title', 'data'],
+
+    data() {
+      return {
+        encodeURIComponent
+      }
+    }
   };
 </script>

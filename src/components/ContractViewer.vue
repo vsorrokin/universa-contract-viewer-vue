@@ -67,7 +67,8 @@
       return {
         contract: null,
         keyContractId: null,
-        storage: null
+        storage: null,
+        inProgress: false
       }
     },
 
@@ -86,10 +87,14 @@
 
     methods: {
       async loadContract() {
+        if (this.inProgress) return;
+        this.inProgress = true;
+
         this.storage = null;
 
         if (!this.data && !this.contractId) {
           this.keyContractId = '';
+          this.inProgress = false;
           return;
         }
 
@@ -101,8 +106,7 @@
           contract = Uni.Boss.load(boss).contract;
           contractId = (await contract.hashId()).base64;
         } catch (e) {
-          console.error(e);
-          return;
+          //console.error(e);
         }
 
         const cloudResult = await this.loadFromCloud(contractId);
@@ -125,6 +129,7 @@
           this.keyContractId = this.contractId;
         }
 
+        this.inProgress = false;
       },
 
       async loadFromCloud(contractId) {
