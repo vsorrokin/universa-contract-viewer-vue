@@ -25,13 +25,13 @@
 </style>
 
 <script>
-  import VTitle from '@/components/blocks/Title';
-  import VGeneral from '@/components/blocks/General';
-  import VOwner from '@/components/blocks/Owner';
-  import VStaticData from '@/components/blocks/StaticData';
-  import VSignatures from '@/components/blocks/Signatures';
-  import VStatus from '@/components/blocks/Status';
-  import VStorage from '@/components/blocks/Storage';
+  import VTitle from './blocks/Title';
+  import VGeneral from './blocks/General';
+  import VOwner from './blocks/Owner';
+  import VStaticData from './blocks/StaticData';
+  import VSignatures from './blocks/Signatures';
+  import VStatus from './blocks/Status';
+  import VStorage from './blocks/Storage';
 
   export default {
     name: 'universa-contract-viewer',

@@ -1,4 +1,4 @@
-import {selectText, copy} from '@/util/helpers';
+import {selectText, copy} from '../util/helpers';
 
 export default {
   data() {

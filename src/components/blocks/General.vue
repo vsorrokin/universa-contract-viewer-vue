@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import VDataBlock from '@/components/uikit/DataBlock';
+  import VDataBlock from '../uikit/DataBlock';
 
   export default {
     name: 'contract-general-info',

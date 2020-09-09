@@ -24,8 +24,8 @@
 </style>
 
 <script>
-  import CopyMixin from '@/mixins/copy';
-  import LongMixin from '@/mixins/long';
+  import CopyMixin from '../../mixins/copy';
+  import LongMixin from '../../mixins/long';
 
   export default {
     name: 'data-block',

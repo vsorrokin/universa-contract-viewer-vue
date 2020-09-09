@@ -15,7 +15,7 @@
 <script>
   import dayjs from 'dayjs';
 
-  import VDataBlock from '@/components/uikit/DataBlock';
+  import VDataBlock from '../uikit/DataBlock';
 
   let privateKey = `JgAcAQABvID2aGSNX6bzGyUAQjReoePsIwjrcKXvKR6mODV588tuxy2bJKiU
                     DoFuMwN2RDB+1RVEIxDN2oaU2phiu6cnNMEv99eQ02P2oxODzKKmO/80rLhI
