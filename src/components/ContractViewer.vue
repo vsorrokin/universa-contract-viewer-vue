@@ -103,7 +103,17 @@
 
         try {
           const boss = Uni.decode64(this.data);
-          contract = Uni.Boss.load(boss).contract;
+          const data = Uni.Boss.load(boss);
+
+          if (!data.contract?.hashId) {
+            contract = Uni.Capsule.unpack(boss);
+            if (!contract.hashId) {
+              contract = Uni.Contract.unpack(boss);
+            }
+          } else {
+            contract = data.contract;
+          }
+
           contractId = (await contract.hashId()).base64;
         } catch (e) {
           //console.error(e);
