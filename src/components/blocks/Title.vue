@@ -44,11 +44,14 @@
 
     methods: {
       fillTitleInfo() {
+        const defaultTitle = 'Universa smart contract';
+
         if (!this.contract) {
-          this.info.name = 'Universa smart contract';
+          this.info.name = defaultTitle;
           return;
         }
-        this.info.name = this.contract.definition.data.name;
+        
+        this.info.name = this.contract.definition.data.name || defaultTitle;
         this.info.description = this.contract.definition.data.description;
       }
     }
