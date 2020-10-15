@@ -1,5 +1,8 @@
 <template lang="pug">
   #app
+    <select class="lang-selector" v-model="$i18n.locale">
+      <option v-for="lang in ['en', 'ru']" :key="lang">{{lang}}</option>
+    </select>
     input(type="file" @change="submit")
     //v-contract-viewer(:data="contract" contract-id="NPo4dIkNdgYfGiNrdExoX003+lFT/d45OA6GifmcRoTzxSRSm5c5jDHBSTaAS+QleuN7ttX1rTvSQbHIIqkcK/zWjx/fCpP9ziwsgXbyyCtUhLqP9G4YZ+zEY/yL/GVE")
     v-contract-viewer(:data="contract")

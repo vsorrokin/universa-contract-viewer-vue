@@ -28,31 +28,25 @@
         required: true
       }
     },
-
-    created() {
-      this.fillTitleInfo();
-    },
-
-    data() {
-      return {
-        info: {
+    
+    computed: {
+      info() {
+        const res = {
           name: null,
           description: null
-        }
-      }
-    },
+        };
 
-    methods: {
-      fillTitleInfo() {
         const defaultTitle = this.$t('viewer.uni_smart_contract');
 
         if (!this.contract) {
-          this.info.name = defaultTitle;
-          return;
+          res.name = defaultTitle;
+          return res;
         }
         
-        this.info.name = this.contract.definition.data.name || defaultTitle;
-        this.info.description = this.contract.definition.data.description;
+        res.name = this.contract.definition.data.name || defaultTitle;
+        res.description = this.contract.definition.data.description;
+
+        return res;
       }
     }
   };

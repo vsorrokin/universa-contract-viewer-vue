@@ -14,24 +14,30 @@
       }
     },
 
-    created() {
-      this.fillSignatures();
+    async created() {
+      this.keys = await this.contract.getSignatureKeys();
     },
 
     data() {
       return {
-        info: {
-          signatures: null
-        }
+        keys: null
       }
     },
 
-    methods: {
-      async fillSignatures() {
-        const keys = await this.contract.getSignatureKeys();
+    computed: {
+      info() {
+        const res = {
+          signatures: null
+        };
+
+        if (!this.keys) return res;
+
+        res.ownerAdresses = this.contract.owner.addresses.map((it, idx) => {
+          return {label: `${this.$t('viewer.Key')} #` + (idx + 1), value: it.base58, long: true};
+        });
 
         const keyAddresses = [];
-        keys.forEach((key, idx) => {
+        this.keys.forEach((key, idx) => {
           keyAddresses.push({
             label: `Key #${idx + 1} (short)`,
             value: key.shortAddress58,
@@ -39,7 +45,7 @@
           });
 
           keyAddresses.push({
-            label: `Key #${idx + 1} (long)`,
+            label: `${this.$t('viewer.Key')} #${idx + 1} (long)`,
             value: key.longAddress58,
             long: true
           });
@@ -56,16 +62,18 @@
 
         for (let key in roles) {
 
-          if (roles[key].availableFor({roles, keys})) {
+          if (roles[key].availableFor({roles, keys: this.keys})) {
             rolesList.push(roles[key].name);
           }
 
         }
 
-        this.info.signatures = [
+        res.signatures = [
           {label: this.$t('viewer.Roles'), value: rolesList.join(', ')},
           ...keyAddresses
         ];
+
+        return res;
       }
     },
 

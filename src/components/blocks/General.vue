@@ -14,13 +14,19 @@
       }
     },
 
-    created() {
-      this.fillGeneralInfo();
-    },
-
     data() {
       return {
-        info: {
+        contractId: null
+      }
+    },
+
+    async created() {
+      this.contractId = (await this.contract.hashId()).base64;
+    },
+
+    computed: {
+      info() {
+        const res = {
           general: {
             rev: {
               label: this.$t('viewer.Revision'),
@@ -56,45 +62,45 @@
               value: null
             }
           }
-        }
-      }
-    },
+        };
 
-    methods: {
-      async fillGeneralInfo() {
+        if (!this.contractId) return res;
+
         const branch = this.contract.state.branchId ? `${this.$t('viewer.branch')} ${this.contract.state.branchId}` : this.$t('viewer.root_branch');
-        this.info.general.rev.value = `${this.$t('viewer.revision')} ${this.contract.state.revision}, ${branch}`;
+        res.general.rev.value = `${this.$t('viewer.revision')} ${this.contract.state.revision}, ${branch}`;
 
-        this.info.general.issued.value = this.contract.definition.createdAt.toISOString();
+        res.general.issued.value = this.contract.definition.createdAt.toISOString();
 
-        this.info.general.expires.value = this.contract.state.expiresAt.toISOString();
+        res.general.expires.value = this.contract.state.expiresAt.toISOString();
 
-        this.info.general.id.value = (await this.contract.hashId()).base64;
+        res.general.id.value = this.contractId;
 
         if (this.contract.origin) {
-          this.info.general.origin.value = this.contract.origin.base64;
-          this.info.general.origin.long = true;
-          this.info.general.origin.contractLink = true;
+          res.general.origin.value = this.contract.origin.base64;
+          res.general.origin.long = true;
+          res.general.origin.contractLink = true;
         } else {
-          this.info.general.origin.value = this.$t('viewer.root_contract');
-          this.info.general.origin.long = false;
-          this.info.general.origin.contractLink = false;
+          res.general.origin.value = this.$t('viewer.root_contract');
+          res.general.origin.long = false;
+          res.general.origin.contractLink = false;
         }
 
         if (this.contract.parent) {
-          this.info.general.parent.value = this.contract.parent.base64;
-          this.info.general.parent.long = true;
-          this.info.general.parent.contractLink = true;
+          res.general.parent.value = this.contract.parent.base64;
+          res.general.parent.long = true;
+          res.general.parent.contractLink = true;
         } else {
-          this.info.general.parent.value = this.$t('viewer.root_contract');
-          this.info.general.parent.long = false;
-          this.info.general.parent.contractLink = false;
+          res.general.parent.value = this.$t('viewer.root_contract');
+          res.general.parent.long = false;
+          res.general.parent.contractLink = false;
         }
 
-        this.info.general.api_level.value = this.contract.version;
+        res.general.api_level.value = this.contract.version;
 
-        this.info.general = Object.values(this.info.general);
-      },
+        res.general = Object.values(res.general);
+
+        return res;
+      }
     },
 
     components: {

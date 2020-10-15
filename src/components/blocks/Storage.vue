@@ -10,21 +10,15 @@
 
     props: ['data'],
 
-    created() {
-      this.fillStorageData();
-    },
-
-    data() {
-      return {
-        info: {
+    computed: {
+      info() {
+        const res = {
           storage: null
-        }
-      }
-    },
+        };
 
-    methods: {
-      fillStorageData() {
-        this.info.storage = [
+        if (!this.data) return res;
+
+        res.storage = [
           {
             label: this.$t('viewer.uni_cloud'),
             html: true,
@@ -32,6 +26,8 @@
             value: `<a href="${this.data}" class="link">${this.$t('viewer.download')}</a>`
           }
         ];
+
+        return res;
       }
     },
 

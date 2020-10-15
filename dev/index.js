@@ -11,7 +11,8 @@ Vue.use(VueI18n);
 const i18n = new VueI18n({
   locale: 'en',
   messages: {
-    en: require('@/i18n/en.json')
+    en: require('@/i18n/en.json'),
+    ru: require('@/i18n/ru.json')
   }
 });
 

@@ -14,23 +14,19 @@
       }
     },
 
-    created() {
-      this.fillOwnerInfo();
-    },
-
-    data() {
-      return {
-        info: {
+    computed: {
+      info() {
+        const res = {
           ownerAdresses: null
-        }
-      }
-    },
+        };
 
-    methods: {
-      fillOwnerInfo() {
-        this.info.ownerAdresses = this.contract.owner.addresses.map((it, idx) => {
-          return {label: 'Key #' + (idx + 1), value: it.base58, long: true};
+        if (!this.contract) return res;
+
+        res.ownerAdresses = this.contract.owner.addresses.map((it, idx) => {
+          return {label: `${this.$t('viewer.Key')} #` + (idx + 1), value: it.base58, long: true};
         });
+
+        return res;
       }
     },
 

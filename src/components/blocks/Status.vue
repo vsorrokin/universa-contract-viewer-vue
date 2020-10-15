@@ -59,7 +59,43 @@
         info: {
 
         },
-        status: []
+        statusResponse: null
+      }
+    },
+
+    computed: {
+      status() {
+        if (!this.statusResponse) return [];
+
+        const status = this.statusResponse;
+
+        let statusValue = this.getStateValue(status.states);
+        let statusText = statusValue;
+
+        if (this.info.createdAt) {
+          statusText = `${statusValue}, ${dayjs(this.info.createdAt).format('YYYY DD MMM HH:mm')}`;
+        }
+
+        if (this.info.expiresAt) {
+          statusText = `${statusText}<br/>${this.$t('viewer.Expires')} ${dayjs(this.info.expiresAt).format('YYYY DD MMM HH:mm')}`;
+        }
+
+        const result = [
+          {
+            html: true,
+            label: this.$t('viewer.Status'),
+            value: statusText
+          }
+        ];
+
+        if (statusValue !== 'UNDEFINED') {
+          result.push({
+            label: this.$t('viewer.Network'),
+            value: status.isTestnet ? this.$t('viewer.approved_test') : this.$t('viewer.approved_main')
+          });
+        }
+
+        return result;
       }
     },
 
@@ -110,35 +146,7 @@
         this.checkDone = true;
         this.finishNodeLinesAnimation();
 
-        this.fillStatus(status);
-      },
-
-      fillStatus(status) {
-        let statusValue = this.getStateValue(status.states);
-        let statusText = statusValue;
-
-        if (this.info.createdAt) {
-          statusText = `${statusValue}, ${dayjs(this.info.createdAt).format('YYYY DD MMM HH:mm')}`;
-        }
-
-        if (this.info.expiresAt) {
-          statusText = `${statusText}<br/>${this.$t('viewer.Expires')} ${dayjs(this.info.expiresAt).format('YYYY DD MMM HH:mm')}`;
-        }
-
-        this.status = [
-          {
-            html: true,
-            label: this.$t('viewer.Status'),
-            value: statusText
-          }
-        ];
-
-        if (statusValue !== 'UNDEFINED') {
-          this.status.push({
-            label: this.$t('viewer.Network'),
-            value: status.isTestnet ? this.$t('viewer.approved_test') : this.$t('viewer.approved_main')
-          });
-        }
+        this.statusResponse = status;
       },
 
       getStateValue(states) {
