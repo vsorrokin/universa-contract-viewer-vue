@@ -39,7 +39,7 @@
         const keyAddresses = [];
         this.keys.forEach((key, idx) => {
           keyAddresses.push({
-            label: `Key #${idx + 1} (short)`,
+            label: `${this.$t('viewer.Key')} #${idx + 1} (short)`,
             value: key.shortAddress58,
             long: true
           });
