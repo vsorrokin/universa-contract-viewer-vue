@@ -44,7 +44,7 @@
 
     methods: {
       fillTitleInfo() {
-        const defaultTitle = 'Universa smart contract';
+        const defaultTitle = $t('viewer.uni_smart_contract');
 
         if (!this.contract) {
           this.info.name = defaultTitle;
