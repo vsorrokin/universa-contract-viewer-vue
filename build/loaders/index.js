@@ -5,6 +5,7 @@ const pug = require('./pug');
 const font = require('./font');
 const image = require('./image');
 const css = require('./css');
+const yaml = require('./yaml');
 
 module.exports = {
   babel,
@@ -13,5 +14,6 @@ module.exports = {
   pug,
   font,
   image,
-  css
+  css,
+  yaml
 };

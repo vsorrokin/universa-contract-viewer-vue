@@ -3,7 +3,7 @@
     template(v-if="contract || contractId")
       v-title(:contract="contract" :contract-id="contractId" :style-config="styleConfig" :key="'title' + keyContractId")
 
-      v-status(:contract="contract" :contract-id="contractId" :style-config="styleConfig" :key="'status' + keyContractId")
+      v-status(:contract="contract" :contract-id="contractId" :style-config="styleConfig" :topology="topology" :key="'status' + keyContractId")
 
     template(v-if="contract")
       v-general(:contract="contract" :key="'general' + keyContractId")
@@ -41,6 +41,9 @@
         required: false
       },
       contractId: {
+        required: false
+      },
+      topology: {
         required: false
       },
       styleConfig: {

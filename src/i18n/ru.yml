@@ -1,0 +1,29 @@
+viewer:
+  value_copied: Значение скопировано
+  general: Основная информация
+  Revision: Ревизия
+  revision: ревизия
+  branch: ветка
+  issued: Выпущен
+  Expires: Истекает
+  origin: Источник
+  parent: Родитель
+  api_level: Уровень API
+  definition_data: Данные (определение)
+  state_data: Данные (состояние)
+  root_contract: Это корневой контракт
+  root_branch: корневая ветка
+  owner: Владелец
+  signatures_no_ref: Подписи (проверка ссылок недоступна)
+  Roles: Роли
+  checked_by_nodes: Проверено на {count} узлах
+  contract_status: Статус контракта
+  Status: Статус
+  Network: Сеть
+  approved_main: Подтверждено главной сетью
+  approved_test: Подтверждено тестовой сетью
+  storage: Хранилище
+  uni_cloud: Частное облако Unixchange
+  download: Скачать
+  uni_smart_contract: Смарт-контракт Universa
+  Key: Ключ

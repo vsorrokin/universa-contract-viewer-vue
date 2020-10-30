@@ -1,0 +1,29 @@
+viewer:
+  value_copied: Value copied to clipboard
+  general: General information
+  Revision: Revision
+  revision: revision
+  branch: branch
+  issued: Issued
+  Expires: Expires
+  origin: Origin
+  parent: Parent
+  api_level: API level
+  definition_data: Definition data
+  state_data: State data
+  root_contract: This is a root contract
+  root_branch: root branch
+  owner: Owner
+  signatures_no_ref: Signatures (references check is unavailable)
+  Roles: Roles
+  checked_by_nodes: Checked by {count} nodes
+  contract_status: Contract status
+  Status: Status
+  Network: Network
+  approved_main: Approved by Main Net
+  approved_test: Approved by Test Net
+  storage: Storage
+  uni_cloud: Unixchange private cloud
+  download: Download
+  uni_smart_contract: Universa smart contract
+  Key: Key

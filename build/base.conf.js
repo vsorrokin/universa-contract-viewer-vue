@@ -28,7 +28,8 @@ module.exports = {
       loaders.stylus,
       loaders.vue,
       loaders.pug,
-      loaders.css
+      loaders.css,
+      loaders.yaml
     ]
   },
 

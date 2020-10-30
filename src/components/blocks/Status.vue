@@ -42,6 +42,9 @@
       contractId: {
         required: false
       },
+      topology: {
+        required: false
+      },
       styleConfig: {
         required: true
       }
@@ -108,8 +111,18 @@
           privateKey = await Uni.PrivateKey.unpack(boss);
         } catch (e) {}
 
+        let connectSettings = {topologyKey: 'universa_topology'};
 
-        const network = new Uni.Network(privateKey, {topologyKey: 'universa_topology'});
+        if (this.topology) {
+          try {
+            const topology = await Uni.Topology.load(this.topology);
+            connectSettings = {topology};
+          } catch (e) {
+            console.error(e);
+          }
+        }
+
+        const network = new Uni.Network(privateKey, connectSettings);
 
         await network.connect();
 
