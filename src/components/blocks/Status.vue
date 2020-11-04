@@ -116,7 +116,7 @@
         if (this.topology) {
           try {
             const topology = await Uni.Topology.load(this.topology);
-            connectSettings = {topology};
+            connectSettings = {topology, directConnection: true};
           } catch (e) {
             console.error(e);
           }
