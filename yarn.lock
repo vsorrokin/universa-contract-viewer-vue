@@ -6997,10 +6997,10 @@ unique-slug@^2.0.0:
   dependencies:
     imurmurhash "^0.1.4"
 
-universa-core@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/universa-core/-/universa-core-0.7.0.tgz#b44331f9b2864c7a079c3618f9a52c376d56a502"
-  integrity sha512-HCa6SOn0PaHags+TqSs0fmULj22KOzySeZjvjIX9AOsbvtWFEmr2UUGVyKzHdCDo6VY9YMqWFgzhImL7D7kU4g==
+universa-core@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/universa-core/-/universa-core-0.7.1.tgz#4e7b297205f3ad7f4a50075995446a95b9f4249a"
+  integrity sha512-DBp38OEMlcXP7dU/aOa18YzkV2KDc8XxDq61Mop7hOsZ1WMGC3S8OmCSASXNEPpICSutRBxBaYOo20gw+JlWXA==
   dependencies:
     unicrypto "^1.0.6"
     xhr-request "^1.1.0"
